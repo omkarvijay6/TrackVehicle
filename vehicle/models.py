@@ -16,6 +16,9 @@ class TimeStampModel(models.Model):
 
 
 class Vehicle(TimeStampModel):
+    """
+    Basic Vehicle may be Bus, Car
+    """
     name = models.CharField(max_length=200)
 
     def __unicode__(self):
@@ -23,6 +26,11 @@ class Vehicle(TimeStampModel):
 
 
 class Location(TimeStampModel):
+    """
+    A vehicle is tracked using this model. The track of the vehicle is stored in this model.
+    Each instance of location is created when vehicle moving from point A to B(5 seconds)
+    Need to refactor this model if required. To be stored as json to reduce database complexity
+    """
 
     vehicle = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
     latitude = models.FloatField(null=True, blank=True)
