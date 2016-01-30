@@ -33,5 +33,7 @@ class Location(TimeStampModel):
     """
 
     vehicle = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
-    latitude = models.FloatField(null=True, blank=True)
-    longitude = models.FloatField(null=True, blank=True)
+    prev_lat = models.FloatField(null=True, blank=True)
+    prev_long = models.FloatField(null=True, blank=True)
+    current_lat = models.FloatField(null=True, blank=True)
+    current_long = models.FloatField(null=True, blank=True)
