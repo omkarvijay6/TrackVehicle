@@ -14,3 +14,8 @@ class VehicleLocation(RetrieveUpdateAPIView):
     def get_object(self):
         location = get_location()
         return location
+
+    def perform_update(self, serializer):
+        serializer.instance.id = None
+        instance = serializer.save()
+        return instance
