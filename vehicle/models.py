@@ -32,7 +32,7 @@ class Location(TimeStampModel):
     Need to refactor this model if required. To be stored as json to reduce database complexity
     """
 
-    vehicle = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
+    vehicle = models.ForeignKey('Vehicle', null=True, blank=True, on_delete=models.CASCADE)
     prev_lat = models.FloatField(null=True, blank=True)
     prev_long = models.FloatField(null=True, blank=True)
     current_lat = models.FloatField(null=True, blank=True)
