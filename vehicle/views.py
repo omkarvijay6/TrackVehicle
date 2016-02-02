@@ -9,6 +9,19 @@ from vehicle.serializers import VehicleLocationSerializer, TestDataSerializer
 # Create your views here.
 
 class VehicleLocation(RetrieveUpdateAPIView):
+	"""
+	Endpoint updates the location of the vehicle in post request
+	Returns the location of the vehicle in get request
+	payload:
+	{
+	    "prev_lat": 123.2,
+	    "prev_long": 12353.3,
+	    "current_lat": 1252.5,
+	    "current_long": 1945.3,
+
+	}
+	prev lat and long used to calculate the distance travelled and velocity of the vehicle
+	"""
     serializer_class = VehicleLocationSerializer
 
     def get_object(self):
@@ -17,6 +30,11 @@ class VehicleLocation(RetrieveUpdateAPIView):
 
 
 class GetTestData(ListCreateAPIView):
+	"""
+	This end point is used to acquire live test data to store in Location model
+	without vehicle.
+	data can be used later to test on Android
+	"""
 	serializer_class = TestDataSerializer
 	queryset = Location.objects.all()
 
