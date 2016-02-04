@@ -1,11 +1,13 @@
 from django.shortcuts import render
 
 from rest_framework.views import APIView
-from rest_framework.generics import RetrieveUpdateAPIView, ListCreateAPIView
+from rest_framework.generics import RetrieveUpdateAPIView, UpdateAPIView
+from rest_framework import status
+from rest_framework.response import Response
 
-from vehicle.models import Location
-from vehicle.services import get_location
-from vehicle.serializers import LocationSerializer
+from vehicle.models import Location, TestData
+from vehicle.services import get_location, update_locations
+from vehicle.serializers import LocationSerializer, TestDataSerializer
 # Create your views here.
 
 class VehicleLocation(RetrieveUpdateAPIView):
@@ -29,12 +31,19 @@ class VehicleLocation(RetrieveUpdateAPIView):
         return location
 
 
-class GetTestData(ListCreateAPIView):
+class PopulateTestData(UpdateAPIView):
     """
     This end point is used to acquire live test data to store in Location model
     without vehicle.
     data can be used later to test on Android
     """
-    serializer_class = LocationSerializer
-    queryset = Location.objects.all()
+    serializer_class = TestDataSerializer
 
+    def get_object(self):
+        test_data, created = TestData.objects.get_or_create(name='RealTimeMobileGPS')
+        return test_data
+
+    def perform_update(self, serializer):
+        test_data = self.get_object()
+        new_locations = self.request.data.get('locations')
+        update_locations(test_data, new_locations)
