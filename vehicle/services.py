@@ -21,7 +21,7 @@ def update_locations(location_data):
     if test_data:
         test_data = json.loads(test_data)
         count = max(test_data[0].keys())
-        test_data[0]["1"][int(count) + 1] = location_data
+        test_data[0][int(count) + 1] = location_data
     else:
         test_data = [{1: location_data}, {'location_sequnce': 1}]
 
