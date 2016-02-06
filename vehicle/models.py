@@ -37,13 +37,3 @@ class Location(TimeStampModel):
     prev_long = models.FloatField(null=True, blank=True)
     current_lat = models.FloatField(null=True, blank=True)
     current_long = models.FloatField(null=True, blank=True)
-
-
-class TestData(models.Model):
-    """
-    locations is a serializable json field
-    location_sequence_id is to store current location id(helper id)
-    """
-    name = models.CharField(max_length=255)
-    locations = models.CharField(max_length=255)
-    location_sequence_id = models.IntegerField(null=True, blank=True)
