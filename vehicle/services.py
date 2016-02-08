@@ -23,7 +23,7 @@ def update_locations(location_data):
         count = max(map(int, test_data[0].keys()))
         test_data[0][int(count) + 1] = location_data
     else:
-        test_data = [{1: location_data}, {'location_sequnce': 1}]
+        test_data = [{1: location_data}, {'location_sequence': 1}]
 
     with open("testdata.txt", "w") as test_file:
         json.dump(test_data, test_file)
@@ -56,11 +56,12 @@ def update_test_data():
     """
     with open("testdata.txt") as test_file:
         test_data = json.loads(test_file.read())
-    location_sequence = test_data[1]["location_sequence"]
-    if int(max(test_data[0].keys())) < location_sequence:
+
+    if int(max(test_data[0].keys())) < test_data[1]["location_sequence"]:
         test_data[1]["location_sequence"] = 1
     else:
-        test_data[1]["location_sequence"] = location_sequence + 1
+        test_data[1]["location_sequence"] = test_data[1]["location_sequence"] + 1
+    location_sequence = test_data[1]["location_sequence"]
     geo_data = test_data[0][str(location_sequence)]
     update_location_obj(geo_data)
     with open("testdata.txt", "w") as test_file:
