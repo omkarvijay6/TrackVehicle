@@ -57,7 +57,7 @@ def update_test_data():
     with open("testdata.txt") as test_file:
         test_data = json.loads(test_file.read())
 
-    if int(max(test_data[0].keys())) < test_data[1]["location_sequence"]:
+    if max(map(int, test_data[0].keys())) < test_data[1]["location_sequence"]:
         test_data[1]["location_sequence"] = 1
     else:
         test_data[1]["location_sequence"] = test_data[1]["location_sequence"] + 1
