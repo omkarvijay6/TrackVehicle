@@ -5,3 +5,4 @@ django-extensions==1.6.1
 gunicorn==19.4.5
 celery==3.1.20
 redis==2.10.5
+geopy==1.11.0
