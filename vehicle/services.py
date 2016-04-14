@@ -73,7 +73,7 @@ def update_test_data():
 
 
 def update_vehicle_location(location_data):
-    if location_data['Lat'] != '0.0' or location_data['Sat'] != '0':
+    if location_data['lat'] != '0.0' or location_data['sat'] != '0':
         update_location_obj(location_data)
         print "updated the vehicle location"
     else:
