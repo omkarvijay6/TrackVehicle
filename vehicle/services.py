@@ -2,7 +2,11 @@ import json
 
 from .models import Vehicle, Location
 
+
 def get_location():
+    """
+    returns the location of the test vehicle
+    """
     vehicle, created = Vehicle.objects.get_or_create(
         name='TestVehicle')
     location, created = Location.objects.get_or_create(vehicle=vehicle)
@@ -66,3 +70,11 @@ def update_test_data():
     update_location_obj(geo_data)
     with open("testdata.txt", "w") as test_file:
         json.dump(test_data, test_file)
+
+
+def update_vehicle_location(location_data):
+    if location_data['Lat'] != '0.0' or location_data['Sat'] != '0':
+        update_location_obj(location_data)
+        print "updated the vehicle location"
+    else:
+        print "skipped vehicle location update"
